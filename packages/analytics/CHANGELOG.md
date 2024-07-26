@@ -1,5 +1,135 @@
 # @firebase/analytics
 
+## 0.10.6
+
+### Patch Changes
+
+- [`f58d48cd4`](https://github.com/firebase/firebase-js-sdk/commit/f58d48cd42c9f09eab4d8b2a606af360528917f8) [#8301](https://github.com/firebase/firebase-js-sdk/pull/8301) - Begin using [safevalues](https://github.com/google/safevalues) to sanitize HTML vulnerable to XSS.
+
+## 0.10.5
+
+### Patch Changes
+
+- Updated dependencies [[`192561b15`](https://github.com/firebase/firebase-js-sdk/commit/192561b1552a08840d8e341f30f3dbe275465558)]:
+  - @firebase/util@1.9.7
+  - @firebase/component@0.6.8
+  - @firebase/installations@0.6.8
+
+## 0.10.4
+
+### Patch Changes
+
+- [`f66769cca`](https://github.com/firebase/firebase-js-sdk/commit/f66769cca243019354f88ac9dc8de07caf9de56e) [#8243](https://github.com/firebase/firebase-js-sdk/pull/8243) (fixes [#8210](https://github.com/firebase/firebase-js-sdk/issues/8210)) - Analytics - fixed an issue where setConsent was clobbering the consentSettings before passing them to the gtag implementation.
+
+## 0.10.3
+
+### Patch Changes
+
+- [`ab883d016`](https://github.com/firebase/firebase-js-sdk/commit/ab883d016015de0436346f586d8442b5703771b7) [#8237](https://github.com/firebase/firebase-js-sdk/pull/8237) - Bump all packages so staging works.
+
+- Updated dependencies [[`ab883d016`](https://github.com/firebase/firebase-js-sdk/commit/ab883d016015de0436346f586d8442b5703771b7)]:
+  - @firebase/component@0.6.7
+  - @firebase/installations@0.6.7
+  - @firebase/logger@0.4.2
+  - @firebase/util@1.9.6
+
+## 0.10.2
+
+### Patch Changes
+
+- [`0c5150106`](https://github.com/firebase/firebase-js-sdk/commit/0c515010607bf2223b468acb94c672b1279ed1a0) [#8079](https://github.com/firebase/firebase-js-sdk/pull/8079) - Update `repository.url` field in all `package.json` files to NPM's preferred format.
+
+- Updated dependencies [[`0c5150106`](https://github.com/firebase/firebase-js-sdk/commit/0c515010607bf2223b468acb94c672b1279ed1a0)]:
+  - @firebase/installations@0.6.6
+  - @firebase/component@0.6.6
+  - @firebase/logger@0.4.1
+  - @firebase/util@1.9.5
+
+## 0.10.1
+
+### Patch Changes
+
+- [`bf59c0aed`](https://github.com/firebase/firebase-js-sdk/commit/bf59c0aedefabae9bff4d777e1591fe496259293) - Analytics - added two new consent options to the ConsentSettings interface: ad_personalization and ad_user_data.
+
+- Updated dependencies [[`434f8418c`](https://github.com/firebase/firebase-js-sdk/commit/434f8418c3db3ae98489a8461c437c248c039070)]:
+  - @firebase/util@1.9.4
+  - @firebase/installations@0.6.5
+  - @firebase/component@0.6.5
+
+## 0.10.0
+
+### Minor Changes
+
+- [`0a27d2fbf`](https://github.com/firebase/firebase-js-sdk/commit/0a27d2fbf268f07099d4fa5ecab7fbf35a579780) [#7158](https://github.com/firebase/firebase-js-sdk/pull/7158) - Add method `getGoogleAnalyticsClientId()` to retrieve an unique identifier for a web client. This allows users to log purchase and other events from their backends using Google Analytics 4 Measurement Protocol and to have those events be connected to actions taken on the client within their Firebase web app. `getGoogleAnalyticsClientId()` will simplify this event recording process.
+
+## 0.9.5
+
+### Patch Changes
+
+- [`3435ba945`](https://github.com/firebase/firebase-js-sdk/commit/3435ba945a9febf5a0aece05517a5656f58b246f) [#7155](https://github.com/firebase/firebase-js-sdk/pull/7155) (fixes [#7048](https://github.com/firebase/firebase-js-sdk/issues/7048)) - Use the Trusted Types API when composing the gtag URL.
+
+## 0.9.4
+
+### Patch Changes
+
+- Updated dependencies [[`c59f537b1`](https://github.com/firebase/firebase-js-sdk/commit/c59f537b1262b5d7997291b8c1e9324d378effb6)]:
+  - @firebase/util@1.9.3
+  - @firebase/component@0.6.4
+  - @firebase/installations@0.6.4
+
+## 0.9.3
+
+### Patch Changes
+
+- Updated dependencies [[`d071bd1ac`](https://github.com/firebase/firebase-js-sdk/commit/d071bd1acaa0583b4dd3454387fc58eafddb5c30)]:
+  - @firebase/util@1.9.2
+  - @firebase/component@0.6.3
+  - @firebase/installations@0.6.3
+
+## 0.9.2
+
+### Patch Changes
+
+- Updated dependencies [[`0bab0b7a7`](https://github.com/firebase/firebase-js-sdk/commit/0bab0b7a786d1563bf665904c7097d1fe06efce5)]:
+  - @firebase/util@1.9.1
+  - @firebase/component@0.6.2
+  - @firebase/installations@0.6.2
+
+## 0.9.1
+
+### Patch Changes
+
+- Updated dependencies [[`d4114a4f7`](https://github.com/firebase/firebase-js-sdk/commit/d4114a4f7da3f469c0c900416ac8beee58885ec3), [`06dc1364d`](https://github.com/firebase/firebase-js-sdk/commit/06dc1364d7560f4c563e1ccc89af9cad4cd91df8)]:
+  - @firebase/util@1.9.0
+  - @firebase/component@0.6.1
+  - @firebase/installations@0.6.1
+
+## 0.9.0
+
+### Minor Changes
+
+- [`1625f7a95`](https://github.com/firebase/firebase-js-sdk/commit/1625f7a95cc3ffb666845db0a8044329be74b5be) [#6799](https://github.com/firebase/firebase-js-sdk/pull/6799) - Update TypeScript version to 4.7.4.
+
+### Patch Changes
+
+- Updated dependencies [[`c20633ed3`](https://github.com/firebase/firebase-js-sdk/commit/c20633ed35056cbadc9d65d9ceddf4e28d1ea666), [`1625f7a95`](https://github.com/firebase/firebase-js-sdk/commit/1625f7a95cc3ffb666845db0a8044329be74b5be)]:
+  - @firebase/util@1.8.0
+  - @firebase/component@0.6.0
+  - @firebase/installations@0.6.0
+  - @firebase/logger@0.4.0
+
+## 0.8.4
+
+### Patch Changes
+
+- [`4af28c1a4`](https://github.com/firebase/firebase-js-sdk/commit/4af28c1a42bd25ce2353f694ca1724c6101cbce5) [#6682](https://github.com/firebase/firebase-js-sdk/pull/6682) - Upgrade TypeScript to 4.7.4.
+
+- Updated dependencies [[`4af28c1a4`](https://github.com/firebase/firebase-js-sdk/commit/4af28c1a42bd25ce2353f694ca1724c6101cbce5)]:
+  - @firebase/component@0.5.21
+  - @firebase/installations@0.5.16
+  - @firebase/logger@0.3.4
+  - @firebase/util@1.7.3
+
 ## 0.8.3
 
 ### Patch Changes

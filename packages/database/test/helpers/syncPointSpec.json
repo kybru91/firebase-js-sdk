@@ -3729,7 +3729,7 @@
         "data": {
           "4": { "age": 41, "highscore": 400, "name": "old mama"},
           "5": { "age": 18, "highscore": 1200, "name": "young mama"},
-          "6": { "age": 20, "highscore": 1003, "name": "micheal blub"},
+          "6": { "age": 20, "highscore": 1003, "name": "michael blub"},
           "7": { "age": 30, "highscore": 10000, "name": "no. 7"}
         },
         "events": [
@@ -3752,7 +3752,7 @@
             "type": "child_added",
             "name": "6",
             "prevName": "5",
-            "data": { "age": 20, "highscore": 1003, "name": "micheal blub"}
+            "data": { "age": 20, "highscore": 1003, "name": "michael blub"}
           },
           {
             "path": "",
@@ -3767,7 +3767,7 @@
             "data": {
               "4": { "age": 41, "highscore": 400, "name": "old mama"},
               "5": { "age": 18, "highscore": 1200, "name": "young mama"},
-              "6": { "age": 20, "highscore": 1003, "name": "micheal blub"},
+              "6": { "age": 20, "highscore": 1003, "name": "michael blub"},
               "7": { "age": 30, "highscore": 10000, "name": "no. 7"}
             }
           }
@@ -3800,7 +3800,7 @@
             "data": {
               "4": { "age": 25, "highscore": 400, "name": "old mama"},
               "5": { "age": 18, "highscore": 1200, "name": "young mama"},
-              "6": { "age": 20, "highscore": 1003, "name": "micheal blub"},
+              "6": { "age": 20, "highscore": 1003, "name": "michael blub"},
               "7": { "age": 30, "highscore": 10000, "name": "no. 7"}
             }
           }
@@ -4173,6 +4173,249 @@
             "type": "value",
             "data": {
               "c": { "index": 2, "value": "c" }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Queries with startAfter and endBefore work",
+    "steps":
+    [
+      {
+        "type": "listen",
+        "path": "",
+        "params": {
+          "tag": 1,
+          "orderBy": "index",
+          "startAfter": { "index": 1 },
+          "endBefore": { "index": 10 }
+        },
+        "events": []
+      },
+      {
+        ".comment": "update from server sends all data",
+        "type": "serverUpdate",
+        "path": "",
+        "data": {
+          "a": { "index": 0, "value": "a" },
+          "b": { "index": 2, "value": "b" },
+          "c": { "index": 9, "value": "c" },
+          "d": { "index": 11, "value": "d" }
+        },
+        "events": [
+          {
+            "path": "",
+            "type": "child_added",
+            "name": "b",
+            "prevName": null,
+            "data": { "index": 2, "value": "b" }
+          },
+          {
+            "path": "",
+            "type": "child_added",
+            "name": "c",
+            "prevName": "b",
+            "data": { "index": 9, "value": "c" }
+          },
+          {
+            "path": "",
+            "type": "value",
+            "data": {
+              "b": { "index": 2, "value": "b" },
+              "c": { "index": 9, "value": "c" }
+            }
+          }
+        ]
+      },
+      {
+        ".comment": "update from server to move child c out of query",
+        "type": "serverUpdate",
+        "path": "c/index",
+        "data": 10,
+        "events": [
+          {
+            "path": "",
+            "type": "child_removed",
+            "name": "c",
+            "data": { "index": 9, "value": "c" }
+          },
+          {
+            "path": "",
+            "type": "value",
+            "data": {
+              "b": { "index": 2, "value": "b" }
+            }
+          }
+        ]
+      },
+      {
+        ".comment": "update from server to move child b out of window",
+        "type": "serverUpdate",
+        "path": "b/index",
+        "data": 1,
+        "events": [
+          {
+            "path": "",
+            "type": "child_removed",
+            "name": "b",
+            "data": { "index": 2, "value": "b" }
+          },
+          {
+            "path": "",
+            "type": "value",
+            "data": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Queries with startAfter, endBefore, and orderByChild work",
+    "steps":
+    [
+      {
+        "type": "listen",
+        "path": "",
+        "params": {
+          "tag": 1,
+          "orderBy": "foo/index",
+          "startAfter": { "index": 1, "name": "foo" },
+          "endBefore": { "index": 10, "name": "foo" }
+        },
+        "events": []
+      },
+      {
+        ".comment": "update from server sends all data",
+        "type": "serverUpdate",
+        "path": "",
+        "data": {
+          "a": { "foo": { "index": 0, "value": "a" } },
+          "b": { "foo": { "index": 2, "value": "b" } },
+          "c": { "foo": { "index": 9, "value": "c" } },
+          "d": { "foo": { "index": 11, "value": "d" } }
+        },
+        "events": [
+          {
+            "path": "",
+            "type": "child_added",
+            "name": "b",
+            "prevName": null,
+            "data": { "foo": { "index": 2, "value": "b" } }
+          },
+          {
+            "path": "",
+            "type": "child_added",
+            "name": "c",
+            "prevName": "b",
+            "data": { "foo": { "index": 9, "value": "c" } }
+          },
+          {
+            "path": "",
+            "type": "value",
+            "data": {
+              "b": { "foo": { "index": 2, "value": "b" } },
+              "c": { "foo": { "index": 9, "value": "c" } }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Queries indexed by key with startAfter, endBefore, and limitToFirst work",
+    "steps":
+    [
+      {
+        "type": "listen",
+        "path": "",
+        "params": {
+          "tag": 1,
+          "orderByKey": true,
+          "startAfter": { "index": "a" },
+          "endBefore": { "index": "d" },
+          "limitToFirst": 1
+        },
+        "events": []
+      },
+      {
+        ".comment": "update from server sends all data",
+        "type": "serverUpdate",
+        "path": "",
+        "data": {
+          "a": { ".value": "a" },
+          "b": { ".value": "b" },
+          "c": { ".value": "c" },
+          "d": { ".value": "d" }
+        },
+        "events": [
+          {
+            "path": "",
+            "type": "child_added",
+            "name": "b",
+            "prevName": null,
+            "data": { ".value": "b" }
+          },
+          {
+            "path": "",
+            "type": "value",
+            "data": {
+              "b": { ".value": "b" }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Queries indexed by key with startAfter, endBefore, and limitToLast work",
+    "steps":
+    [
+      {
+        "type": "listen",
+        "path": "",
+        "params": {
+          "tag": 1,
+          "orderByKey": true,
+          "startAfter": { "index": "a" },
+          "endBefore": { "index": "e" },
+          "limitToLast": 2
+        },
+        "events": []
+      },
+      {
+        ".comment": "update from server sends all data",
+        "type": "serverUpdate",
+        "path": "",
+        "data": {
+          "a": { ".value": "a" },
+          "b": { ".value": "b" },
+          "c": { ".value": "c" },
+          "d": { ".value": "d" },
+          "e": { ".value": "e" }
+        },
+        "events": [
+          {
+            "path": "",
+            "type": "child_added",
+            "name": "c",
+            "prevName": null,
+            "data": { ".value": "c" }
+          },
+          {
+            "path": "",
+            "type": "child_added",
+            "name": "d",
+            "prevName": "c",
+            "data": { ".value": "d" }
+          },
+          {
+            "path": "",
+            "type": "value",
+            "data": {
+              "c": { ".value": "c" },
+              "d": { ".value": "d" }
             }
           }
         ]
@@ -5488,7 +5731,7 @@
   },
 
   {
-    "name": "User child overwrite for non-existent server node",
+    "name": "User child overwrite for nonexistent server node",
     "steps": [
       {
         "type": "listen",
@@ -5605,7 +5848,7 @@
         ]
       },
       {
-        ".comment": "User deletes non-existent key, which shouldn't trigger events",
+        ".comment": "User deletes nonexistent key, which shouldn't trigger events",
         "type": "set",
         "path": "key-2/non-key",
         "data": null,
@@ -6725,7 +6968,7 @@
         ]
       },
       {
-        ".comment": "Server now incorperates user update",
+        ".comment": "Server now incorporates user update",
         "type": "serverUpdate",
         "tag": 1,
         "path": "key-2",
@@ -6957,7 +7200,7 @@
         ]
       },
       {
-        ".comment": "this caused vomitting in the past...",
+        ".comment": "this caused vomiting in the past...",
         "type": "set",
         "path": "a/foo/bar",
         "data": null,

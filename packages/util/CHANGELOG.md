@@ -1,5 +1,73 @@
 # @firebase/util
 
+## 1.9.7
+
+### Patch Changes
+
+- [`192561b15`](https://github.com/firebase/firebase-js-sdk/commit/192561b1552a08840d8e341f30f3dbe275465558) [#8315](https://github.com/firebase/firebase-js-sdk/pull/8315) (fixes [#8299](https://github.com/firebase/firebase-js-sdk/issues/8299)) - fix: browser detection (detect either window or web worker)
+
+## 1.9.6
+
+### Patch Changes
+
+- [`ab883d016`](https://github.com/firebase/firebase-js-sdk/commit/ab883d016015de0436346f586d8442b5703771b7) [#8237](https://github.com/firebase/firebase-js-sdk/pull/8237) - Bump all packages so staging works.
+
+## 1.9.5
+
+### Patch Changes
+
+- [`0c5150106`](https://github.com/firebase/firebase-js-sdk/commit/0c515010607bf2223b468acb94c672b1279ed1a0) [#8079](https://github.com/firebase/firebase-js-sdk/pull/8079) - Update `repository.url` field in all `package.json` files to NPM's preferred format.
+
+## 1.9.4
+
+### Patch Changes
+
+- [`434f8418c`](https://github.com/firebase/firebase-js-sdk/commit/434f8418c3db3ae98489a8461c437c248c039070) [#7963](https://github.com/firebase/firebase-js-sdk/pull/7963) (fixes [#7962](https://github.com/firebase/firebase-js-sdk/issues/7962)) - Fix isSafari() throwing on React Native
+
+## 1.9.3
+
+### Patch Changes
+
+- [`c59f537b1`](https://github.com/firebase/firebase-js-sdk/commit/c59f537b1262b5d7997291b8c1e9324d378effb6) [#7019](https://github.com/firebase/firebase-js-sdk/pull/7019) - Modify base64 decoding logic to throw on invalid input, rather than silently truncating it.
+
+## 1.9.2
+
+### Patch Changes
+
+- [`d071bd1ac`](https://github.com/firebase/firebase-js-sdk/commit/d071bd1acaa0583b4dd3454387fc58eafddb5c30) [#7007](https://github.com/firebase/firebase-js-sdk/pull/7007) (fixes [#7005](https://github.com/firebase/firebase-js-sdk/issues/7005)) - Move exports.default fields to always be the last field. This fixes a bug caused in 9.17.0 that prevented some bundlers and frameworks from building.
+
+## 1.9.1
+
+### Patch Changes
+
+- [`0bab0b7a7`](https://github.com/firebase/firebase-js-sdk/commit/0bab0b7a786d1563bf665904c7097d1fe06efce5) [#6981](https://github.com/firebase/firebase-js-sdk/pull/6981) - Added browser CJS entry points (expected by Jest when using JSDOM mode).
+
+## 1.9.0
+
+### Minor Changes
+
+- [`06dc1364d`](https://github.com/firebase/firebase-js-sdk/commit/06dc1364d7560f4c563e1ccc89af9cad4cd91df8) [#6901](https://github.com/firebase/firebase-js-sdk/pull/6901) - Allow users to specify their environment as `node` or `browser` to override Firebase's runtime environment detection and force the SDK to act as if it were in the respective environment.
+
+### Patch Changes
+
+- [`d4114a4f7`](https://github.com/firebase/firebase-js-sdk/commit/d4114a4f7da3f469c0c900416ac8beee58885ec3) [#6874](https://github.com/firebase/firebase-js-sdk/pull/6874) (fixes [#6838](https://github.com/firebase/firebase-js-sdk/issues/6838)) - Reformat a comment that causes compile errors in some build toolchains.
+
+## 1.8.0
+
+### Minor Changes
+
+- [`1625f7a95`](https://github.com/firebase/firebase-js-sdk/commit/1625f7a95cc3ffb666845db0a8044329be74b5be) [#6799](https://github.com/firebase/firebase-js-sdk/pull/6799) - Update TypeScript version to 4.7.4.
+
+### Patch Changes
+
+- [`c20633ed3`](https://github.com/firebase/firebase-js-sdk/commit/c20633ed35056cbadc9d65d9ceddf4e28d1ea666) [#6841](https://github.com/firebase/firebase-js-sdk/pull/6841) - Fix for third party window content that cannot access IndexedDB if the browser is set to never accept third party cookies on Firefox.
+
+## 1.7.3
+
+### Patch Changes
+
+- [`4af28c1a4`](https://github.com/firebase/firebase-js-sdk/commit/4af28c1a42bd25ce2353f694ca1724c6101cbce5) [#6682](https://github.com/firebase/firebase-js-sdk/pull/6682) - Upgrade TypeScript to 4.7.4.
+
 ## 1.7.2
 
 ### Patch Changes
@@ -88,7 +156,7 @@
 
 ### Patch Changes
 
-- [`b835b4cba`](https://github.com/firebase/firebase-js-sdk/commit/b835b4cbabc4b7b180ae38b908c49205ce31a422) [#5506](https://github.com/firebase/firebase-js-sdk/pull/5506) - areCookiesEnabled could encounter runtime errors in certain enviornments
+- [`b835b4cba`](https://github.com/firebase/firebase-js-sdk/commit/b835b4cbabc4b7b180ae38b908c49205ce31a422) [#5506](https://github.com/firebase/firebase-js-sdk/pull/5506) - areCookiesEnabled could encounter runtime errors in certain environments
 
 ## 1.3.0
 

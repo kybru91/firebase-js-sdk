@@ -95,7 +95,8 @@ function repoManagerApplyEmulatorSettings(
     repo.repoInfo_.webSocketOnly,
     repo.repoInfo_.nodeAdmin,
     repo.repoInfo_.persistenceKey,
-    repo.repoInfo_.includeNamespaceInQueryParams
+    repo.repoInfo_.includeNamespaceInQueryParams,
+    /*isUsingEmulator=*/ true
   );
 
   if (tokenProvider) {
@@ -302,10 +303,9 @@ export function forceLongPolling() {
 }
 
 /**
- * Returns the instance of the Realtime Database SDK that is associated
- * with the provided {@link @firebase/app#FirebaseApp}. Initializes a new instance with
- * with default settings if no instance exists or if the existing instance uses
- * a custom database URL.
+ * Returns the instance of the Realtime Database SDK that is associated with the provided
+ * {@link @firebase/app#FirebaseApp}. Initializes a new instance with default settings if
+ * no instance exists or if the existing instance uses a custom database URL.
  *
  * @param app - The {@link @firebase/app#FirebaseApp} instance that the returned Realtime
  * Database instance is associated with.
@@ -320,9 +320,11 @@ export function getDatabase(
   const db = _getProvider(app, 'database').getImmediate({
     identifier: url
   }) as Database;
-  const emulator = getDefaultEmulatorHostnameAndPort('database');
-  if (emulator) {
-    connectDatabaseEmulator(db, ...emulator);
+  if (!db._instanceStarted) {
+    const emulator = getDefaultEmulatorHostnameAndPort('database');
+    if (emulator) {
+      connectDatabaseEmulator(db, ...emulator);
+    }
   }
   return db;
 }

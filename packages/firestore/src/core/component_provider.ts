@@ -31,6 +31,7 @@ import { LruParams } from '../local/lru_garbage_collector';
 import { LruScheduler } from '../local/lru_garbage_collector_impl';
 import {
   MemoryEagerDelegate,
+  MemoryLruDelegate,
   MemoryPersistence
 } from '../local/memory_persistence';
 import { Scheduler, Persistence } from '../local/persistence';
@@ -53,6 +54,7 @@ import {
   remoteStoreShutdown
 } from '../remote/remote_store';
 import { JsonProtoSerializer } from '../remote/serializer';
+import { hardAssert } from '../util/assert';
 import { AsyncQueue } from '../util/async_queue';
 import { Code, FirestoreError } from '../util/error';
 
@@ -164,11 +166,41 @@ export class MemoryOfflineComponentProvider
   }
 
   async terminate(): Promise<void> {
-    if (this.gcScheduler) {
-      this.gcScheduler.stop();
-    }
-    await this.sharedClientState.shutdown();
+    this.gcScheduler?.stop();
+    this.indexBackfillerScheduler?.stop();
+    this.sharedClientState.shutdown();
     await this.persistence.shutdown();
+  }
+}
+
+export class LruGcMemoryOfflineComponentProvider extends MemoryOfflineComponentProvider {
+  constructor(protected readonly cacheSizeBytes: number | undefined) {
+    super();
+  }
+
+  createGarbageCollectionScheduler(
+    cfg: ComponentConfiguration,
+    localStore: LocalStore
+  ): Scheduler | null {
+    hardAssert(
+      this.persistence.referenceDelegate instanceof MemoryLruDelegate,
+      'referenceDelegate is expected to be an instance of MemoryLruDelegate.'
+    );
+
+    const garbageCollector =
+      this.persistence.referenceDelegate.garbageCollector;
+    return new LruScheduler(garbageCollector, cfg.asyncQueue, localStore);
+  }
+
+  createPersistence(cfg: ComponentConfiguration): Persistence {
+    const lruParams =
+      this.cacheSizeBytes !== undefined
+        ? LruParams.withCacheSize(this.cacheSizeBytes)
+        : LruParams.DEFAULT;
+    return new MemoryPersistence(
+      p => MemoryLruDelegate.factory(p, lruParams),
+      this.serializer
+    );
   }
 }
 
@@ -450,7 +482,8 @@ export class OnlineComponentProvider {
     );
   }
 
-  terminate(): Promise<void> {
-    return remoteStoreShutdown(this.remoteStore);
+  async terminate(): Promise<void> {
+    await remoteStoreShutdown(this.remoteStore);
+    this.datastore?.terminate();
   }
 }
